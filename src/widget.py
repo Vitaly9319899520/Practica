@@ -6,39 +6,19 @@ import masks
 def mask_account_card(tip_number_cart: str) -> str:
     """Функция маски"""
 
-    digit_card = ""
-    alpha_card = ""
     list_number = tip_number_cart.split()
+    #print(list_number)
 
-    if (
-        " ".join(list_number[:2]) == "Visa Platinum"
-        or "Maestro" in list_number
-        or " ".join(list_number[:2]) == "Visa Classic"
-        or " ".join(list_number[:2]) == "Visa Gold"
-        or "MasterCard" in list_number
-    ):
-
-        for i in list_number:
-            if i.isalpha():
-                alpha_card += i + " "
-                # alpha_card.append(i)
-
-            elif i.isdigit():
-                digit_card += i
-            shifr_card = masks.get_mask_card_number(digit_card)
-
-    elif "Счет" in list_number:
-        for i in list_number:
-            if i.isalpha():
-                alpha_card += i
-            elif i.isdigit():
-                digit_card += i
-            shifr_card = masks.get_mask_account(digit_card)
-
-    return f"{alpha_card} {shifr_card}"
+    if list_number[0] == 'Счет':
+        shifr_card = masks.get_mask_account(list_number[-1])
+    else:
+        shifr_card = masks.get_mask_card_number(list_number[-1])
 
 
-print(mask_account_card("MasterCard 7000792289606361"))
+    return  ' '.join(list_number[:-1]) + " " + shifr_card
+
+
+print(mask_account_card("Мир 1234567890123456"))
 
 
 def get_date(my_date: str) -> str:
