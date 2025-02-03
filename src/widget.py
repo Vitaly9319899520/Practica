@@ -7,15 +7,13 @@ def mask_account_card(tip_number_cart: str) -> str:
     """Функция маски"""
 
     list_number = tip_number_cart.split()
-    #print(list_number)
 
-    if list_number[0] == 'Счет':
+    if list_number[0] == "Счет":
         shifr_card = masks.get_mask_account(list_number[-1])
     else:
         shifr_card = masks.get_mask_card_number(list_number[-1])
 
-
-    return  ' '.join(list_number[:-1]) + " " + shifr_card
+    return " ".join(list_number[:-1]) + " " + shifr_card
 
 
 print(mask_account_card("Мир 1234567890123456"))

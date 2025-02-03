@@ -1,7 +1,7 @@
 def get_mask_card_number(number_cart: str) -> str:
     """Функция для кодирования номера карты"""
 
-    return f"{number_cart[:5]} {number_cart[5:7]}** **** {number_cart[12:16]}"
+    return f"{number_cart[:4]} {number_cart[4:6]}** **** {number_cart[12:16]}"
 
 
 if __name__ == "__main__":
