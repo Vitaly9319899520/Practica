@@ -1,6 +1,6 @@
 from datetime import datetime
 
-import masks
+from .masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(tip_number_cart: str) -> str:
@@ -9,9 +9,9 @@ def mask_account_card(tip_number_cart: str) -> str:
     list_number = tip_number_cart.split()
 
     if list_number[0] == "Счет":
-        shifr_card = masks.get_mask_account(list_number[-1])
+        shifr_card = get_mask_account(list_number[-1])
     else:
-        shifr_card = masks.get_mask_card_number(list_number[-1])
+        shifr_card = get_mask_card_number(list_number[-1])
 
     return " ".join(list_number[:-1]) + " " + shifr_card
 
