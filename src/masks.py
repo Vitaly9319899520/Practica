@@ -17,4 +17,4 @@ def get_mask_account(number_score: str) -> str:
 
 if __name__ == "__main__":
 
-    print(get_mask_account("0987654321001111"))
+    print(get_mask_account("0987654321002222"))
