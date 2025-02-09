@@ -12,7 +12,7 @@ if __name__ == "__main__":
 def get_mask_account(number_score: str) -> str:
     """Функция для кодирования счета карты"""
 
-    return f"**{number_score[12:16]}"
+    return f"**{number_score[-4:]}"
 
 
 if __name__ == "__main__":
