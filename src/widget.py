@@ -1,10 +1,13 @@
 from datetime import datetime
 
-from .masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(tip_number_cart: str) -> str:
     """Функция маски"""
+
+    if not tip_number_cart:
+        return "Введите данные..."
 
     list_number = tip_number_cart.split()
 
@@ -16,14 +19,19 @@ def mask_account_card(tip_number_cart: str) -> str:
     return " ".join(list_number[:-1]) + " " + shifr_card
 
 
-print(mask_account_card("Мир 1234567890123456"))
+if __name__ == "__main__":
+    print(mask_account_card(""))
 
 
 def get_date(my_date: str) -> str:
     """Функция перевода формата даты"""
 
-    date_obj = datetime.strptime(my_date, "%Y-%m-%dT%H:%M:%S.%f")
-    return date_obj.strftime("%d.%m.%Y")
+    try:
+        date_obj = datetime.strptime(my_date, "%Y-%m-%dT%H:%M:%S.%f")
+        return date_obj.strftime("%d.%m.%Y")
+    except ValueError:
+        return "Введите дату в правильном формате"
 
 
-print(get_date("2024-03-11T02:26:18.671407"))
+if __name__ == "__main__":
+    print(get_date(""))
