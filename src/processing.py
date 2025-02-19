@@ -62,3 +62,22 @@ print(
         ]
     )
 )
+
+
+def card_number_generator(start, stop):
+    for number in range(start, stop + 1):
+        str_number = str(number)
+        if len(str_number) < 16:
+            number1 = "0" * (16 - len(str_number)) + str_number
+        else:
+            number1 = str_number
+
+        number_card = f"{number1[:4]} {number1[4:8]} {number1[8:12]} {number1[12:16]}"
+
+        yield number_card
+
+
+gen = card_number_generator(9999997, 9999999)
+print(next(gen))
+print(next(gen))
+print(next(gen))
