@@ -62,6 +62,8 @@ new_list = [
 @pytest.fixture
 def generators():
     return transactions
+
+
 transactions = [
     {
         "id": 939719570,
