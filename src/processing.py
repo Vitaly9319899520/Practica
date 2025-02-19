@@ -13,8 +13,7 @@ def filter_by_state(data_logs: list[dict], state: str = "EXECUTED") -> list[dict
 if __name__ == "__main__":
     new_list_filter = filter_by_state(
         [
-            {"id": 41428829, "state": "EXECUTED",
-             "date": "2019-07-03T18:35:29.512364"},
+            {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
             {
                 "id": 939719570,
                 "state": "EXECUTED",
@@ -44,8 +43,7 @@ def sort_by_data(data_logs: list[dict], reverse: bool = True) -> list[dict]:
 print(
     sort_by_data(
         [
-            {"id": 41428829, "state": "EXECUTED",
-             "date": "2019-07-03T18:35:29.512364"},
+            {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
             {
                 "id": 939719570,
                 "state": "EXECUTED",
