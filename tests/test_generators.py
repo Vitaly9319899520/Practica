@@ -39,6 +39,6 @@ def test_filter_by_currency(generators):
     res = 'Нет данных'
     res_inter = [item for item in generators if item["operationAmount"]["currency"]["code"] == "EUR"]
 
-    assert res_inter == res
+    assert res_inter == res #нужно разобраться
 
 
