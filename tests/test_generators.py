@@ -1,5 +1,7 @@
 import pytest
 
+from src.generators import card_number_generator, transaction_descriptions
+
 
 def test_filter_by_currency(generators):
     res = [
@@ -35,10 +37,83 @@ def test_filter_by_currency(generators):
 
     assert res_inter == res
 
+
 def test_filter_by_currency(generators):
-    res = 'Нет данных'
+    res = []
+    res_inter = [item for item in generators if item["operationAmount"]["currency"]["code"] == []]
+
+    assert res_inter == res
+
+
+def test_filter_by_currency(generators):
+    res = []
     res_inter = [item for item in generators if item["operationAmount"]["currency"]["code"] == "EUR"]
 
-    assert res_inter == res #нужно
+    assert res_inter == res
 
 
+def test_transaction_descriptions_empty(transactions_list_empty):
+    with pytest.raises(ValueError) as exc_info:
+        list(transaction_descriptions(transactions_list_empty))
+    assert str(exc_info.value) == "Нет транзакций"
+
+
+def test_transaction_descriptions(generators):
+    gen = transaction_descriptions(generators)
+    assert next(gen) == "Перевод организации"
+
+
+@pytest.mark.parametrize(
+    "start, stop, expected_numbers",
+    [
+        (
+            1,
+            11,
+            [
+                "0000 0000 0000 0001",
+                "0000 0000 0000 0002",
+                "0000 0000 0000 0003",
+                "0000 0000 0000 0004",
+                "0000 0000 0000 0005",
+                "0000 0000 0000 0006",
+                "0000 0000 0000 0007",
+                "0000 0000 0000 0008",
+                "0000 0000 0000 0009",
+                "0000 0000 0000 0010",
+                "0000 0000 0000 0011",
+            ],
+        )
+    ],
+)
+def test_card_number_generator(start, stop, expected_numbers):
+    number = list(card_number_generator(1, 11))
+    assert number == expected_numbers
+
+
+def test_card_number_generator_finally():
+    number = card_number_generator(9999999999999998, 9999999999999999)
+    assert next(number) == "9999 9999 9999 9998"
+    assert next(number) == "9999 9999 9999 9999"
+
+
+def test_card_number_generator_finally_else():
+    number = card_number_generator(9999999999999999, 10000000000000000000)
+    assert next(number) == "9999 9999 9999 9999"
+
+
+@pytest.mark.parametrize(
+    "start, end, expected_numbers",
+    [
+        (100, 101, ["0000 0000 0000 0100", "0000 0000 0000 0101"]),
+        (102, 103, ["0000 0000 0000 0102", "0000 0000 0000 0103"]),
+    ],
+)
+def test_card_gen_use_parametrize(start, end, expected_numbers):
+    result = list(card_number_generator(start, end))
+    assert result == expected_numbers
+
+
+def test_card_gen_invalid_parameters():
+    with pytest.raises(ValueError) as exc_info:
+        list(card_number_generator(2, 1))
+    assert str(exc_info.value) == "Ошибка: Start не должен превышать Stop"

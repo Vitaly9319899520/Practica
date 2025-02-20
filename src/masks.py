@@ -3,6 +3,7 @@ def get_mask_card_number(number_cart: str) -> str:
 
     if number_cart == "":
         return "Введите номер карты"
+
     number_cart_str = number_cart.split()
     for item in number_cart_str:
         number_cart_digit = ""
@@ -32,6 +33,7 @@ def get_mask_account(number_score: str) -> str:
                 return f"**{number_score[-4:]}"
             return "Номер карты должен состоять из 16 цифр"
         return "Номер карты не должен содержать буквы алфавита"
+    return "Некорректный номер карты"
 
 
 if __name__ == "__main__":
