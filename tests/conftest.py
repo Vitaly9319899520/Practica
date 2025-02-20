@@ -111,3 +111,8 @@ transactions = [
         "to": "Счет 14211924144426031657",
     },
 ]
+
+
+@pytest.fixture
+def transactions_list_empty():
+    return []
