@@ -3,6 +3,10 @@ from data import transactions
 
 
 def filter_by_currency(transactions: list[dict], currency: str) -> Iterator[Dict]:
+
+"""Функция нахождения транзакции по коду валюты"""
+
+    
     for item in transactions:
         if item["operationAmount"]["currency"]["code"] == currency:
             yield item
@@ -15,6 +19,10 @@ print(next(usd_transactions, 'Нет данных'))
 
 
 def transaction_descriptions(transactions: list[dict]) -> Iterator[str]:
+
+"""Функция нахождения значения транзакции"""|
+
+    
     for i in transactions:
         for k, v in i.items():
             if k == "description":
@@ -28,6 +36,10 @@ print(next(desc_transactions))
 
 
 def card_number_generator(start, stop):
+
+"""Функция генератор номера карты"""
+
+    
     for number in range(start, stop + 1):
         str_number = str(number)
         if len(str_number) < 16:
