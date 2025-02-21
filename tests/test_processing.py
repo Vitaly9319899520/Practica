@@ -1,7 +1,6 @@
-from src.processing import filter_by_state
 import pytest
-from src.processing import sort_by_data
 
+from src.processing import filter_by_state, sort_by_data
 from tests.conftest import fixture_list, fixture_processing
 
 
